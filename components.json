@@ -10,6 +10,8 @@
   "rsc": false,
   "aliases": {
     "utils": "@/lib/utils",
-    "components": "@/components"
+    "components": "@/components",
+    "types": "@/types",
+    "hooks": "@/hooks"
   }
 }
