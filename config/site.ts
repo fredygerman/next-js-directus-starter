@@ -1,9 +1,16 @@
 export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
-  name: "Next.js",
+  title: "Next Js Starter",
+  name: "Next-js-starter",
+  canonical: "https://nextjs-starter-shadcn.vercel.app/",
+  domain: "https://nextjs-starter-shadcn.vercel.app/",
+  image:
+    "https://storage.googleapis.com/brandflow-bucket/personal/blog/portfolio-og.jpg",
+  type: "website",
+  twitterHandle: "@fredygerman_",
   description:
-    "Beautifully designed components built with Radix UI and Tailwind CSS.",
+    "Amazing starter with Next.js, TypeScript, ESLint, Prettier, chadcn-ui",
   mainNav: [
     {
       title: "Home",
@@ -11,8 +18,13 @@ export const siteConfig = {
     },
   ],
   links: {
-    twitter: "https://twitter.com/shadcn",
-    github: "https://github.com/shadcn/ui",
+    twitter: "https://twitter.com/fredygerman_",
+    github: "https://github.com/fdagreat",
     docs: "https://ui.shadcn.com",
+  },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon-16x16.png",
+    apple: "/apple-touch-icon.png",
   },
 }

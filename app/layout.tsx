@@ -1,35 +1,40 @@
-import "@/styles/globals.css"
-import { Metadata } from "next"
+"use client"
 
-import { siteConfig } from "@/config/site"
+import "@/styles/globals.css"
+import { usePathname } from "next/navigation"
+
 import { fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
+import Seo from "@/components/misc/seo"
 import { TailwindIndicator } from "@/components/misc/tailwind-indicator"
 import { ThemeProvider } from "@/components/misc/theme-provider"
 import { Header } from "@/components/navigation/app/header"
 
-export const metadata: Metadata = {
-  title: {
-    default: siteConfig.name,
-    template: `%s - ${siteConfig.name}`,
-  },
-  description: siteConfig.description,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
-  ],
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
-  },
-}
+// export const metadata: Metadata = {
+//   title: {
+//     default: siteConfig.name,
+//     template: `%s - ${siteConfig.name}`,
+//   },
+//   description: siteConfig.description,
+//   themeColor: [
+//     { media: "(prefers-color-scheme: light)", color: "white" },
+//     { media: "(prefers-color-scheme: dark)", color: "black" },
+//   ],
+//   icons: {
+//     icon: "/favicon.ico",
+//     shortcut: "/favicon-16x16.png",
+//     apple: "/apple-touch-icon.png",
+//   },
+// }
 
 interface RootLayoutProps {
   children: React.ReactNode
 }
 
+const publicRoutes = ["/", "/login", "/signup", "/forgot-password"]
+
 export default function RootLayout({ children }: RootLayoutProps) {
+  const pathname = usePathname()
   return (
     <>
       <html lang="en" suppressHydrationWarning>
@@ -41,11 +46,28 @@ export default function RootLayout({ children }: RootLayoutProps) {
           )}
         >
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            {/* <Seo> */}
             <div className="relative flex min-h-screen flex-col">
+              {pathname.startsWith("/admin") ? (
+                <div className="flex-none">
+                  <Header />
+                </div>
+              ) : null}
+              {pathname.startsWith("/app") ? (
+                <div className="flex-none">
+                  <Header />
+                </div>
+              ) : null}
+              {publicRoutes.includes(pathname) ? null : (
+                <div className="flex-none">
+                  <Header />
+                </div>
+              )}
               <Header />
               <div className="flex-1">{children}</div>
             </div>
             <TailwindIndicator />
+            {/* </Seo> */}
           </ThemeProvider>
         </body>
       </html>
