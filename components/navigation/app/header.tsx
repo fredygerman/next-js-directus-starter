@@ -8,13 +8,36 @@ import { ThemeToggle } from "@/components/misc/theme-toggle"
 
 export function Header() {
   return (
-    <header className="bg-background sticky top-0 z-40 w-full border-b">
-      <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
+    <header className="sticky top-0 z-40 w-full border-b bg-background">
+      <div className="flex h-16 items-center justify-between space-x-4 sm:space-x-0">
+
+        {/* Desktop */}
+
+
+        <div className="hidden w-full items-center justify-between px-4 md:flex">
+
+          
+<div className="flex items-center space-x-2">
+
+      <Link href="/" className="flex items-center space-x-2">
+          <Icons.logo className="h-6 w-6" />
+        </Link>
+
+        <span className="hidden items-end font-bold md:flex  ">{siteConfig.name}</span>
+        </div>
+
+        <div className="flex items-center space-x-2">
+
         <MainNav items={siteConfig.mainNav} />
-        <div className="flex flex-1 items-center justify-end space-x-4">
-          <nav className="flex items-center space-x-1">
-            <Link
-              href={siteConfig.links.github}
+
+        </div>
+        
+        <div className="flex items-center space-x-2">
+        <Link
+              href={
+                siteConfig.socials.find((social) => social.name === "Github")
+                  ?.url ?? ""
+              }
               target="_blank"
               rel="noreferrer"
             >
@@ -29,7 +52,10 @@ export function Header() {
               </div>
             </Link>
             <Link
-              href={siteConfig.links.twitter}
+              href={
+                siteConfig.socials.find((social) => social.name === "Twitter")
+                  ?.url ?? ""
+              }
               target="_blank"
               rel="noreferrer"
             >
@@ -43,9 +69,36 @@ export function Header() {
                 <span className="sr-only">Twitter</span>
               </div>
             </Link>
-            <ThemeToggle />
-          </nav>
+        
+        <ThemeToggle />
+
         </div>
+        </div>
+
+        {/* Mobile */}
+
+        <div className="flex w-full items-center justify-between px-4 md:hidden">
+                   
+<div className="flex items-center space-x-2">
+
+  <MainNav items={siteConfig.mainNav} />
+</div>
+
+         
+<div className="flex items-center space-x-2"><Link href="/" className="flex items-center space-x-2">
+          <Icons.logo className="h-6 w-6" />
+        </Link>
+</div>
+        
+        
+                 
+<div className="flex items-center space-x-2">  <ThemeToggle /></div>
+
+      
+        </div>
+
+      
+ 
       </div>
     </header>
   )

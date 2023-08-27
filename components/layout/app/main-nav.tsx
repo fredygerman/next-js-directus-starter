@@ -12,30 +12,39 @@ interface MainNavProps {
 
 export function MainNav({ items }: MainNavProps) {
   return (
-    <div className="flex gap-6 md:gap-10">
-      <Link href="/" className="flex items-center space-x-2">
-        <Icons.logo className="h-6 w-6" />
-        <span className="inline-block font-bold">{siteConfig.name}</span>
-      </Link>
-      {items?.length ? (
-        <nav className="flex gap-6">
-          {items?.map(
-            (item, index) =>
-              item.href && (
-                <Link
-                  key={index}
-                  href={item.href}
-                  className={cn(
-                    "flex items-center text-sm font-medium text-muted-foreground",
-                    item.disabled && "cursor-not-allowed opacity-80"
-                  )}
-                >
-                  {item.title}
-                </Link>
-              )
-          )}
-        </nav>
-      ) : null}
-    </div>
+    <>
+      {/* Desktop navbar */}
+      <div className="hidden px-1 md:flex md:items-center md:justify-between md:gap-6">
+        {items?.length ? (
+          <nav className="flex gap-6">
+            {items?.map(
+              (item, index) =>
+                item.href && (
+                  <Link
+                    key={index}
+                    href={item.href}
+                    className={cn(
+                      "flex items-center text-sm font-medium text-muted-foreground",
+                      item.disabled && "cursor-not-allowed opacity-80"
+                    )}
+                  >
+                    {item.title}
+                  </Link>
+                )
+            )}
+          </nav>
+        ) : null}
+      </div>
+
+      {/* Mobile navbar */}
+
+      <div className="flex items-center justify-between px-1 md:hidden">
+         <Link href="/" className="flex items-start space-x-2">
+          <Icons.menu className="h-4 w-4" />
+        </Link>
+      </div>
+      
+       
+    </>
   )
 }

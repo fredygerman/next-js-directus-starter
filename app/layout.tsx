@@ -5,10 +5,12 @@ import { usePathname } from "next/navigation"
 
 import { fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
+import AppLayout from "@/components/layout/app/AppLayout"
 import Seo from "@/components/misc/seo"
 import { TailwindIndicator } from "@/components/misc/tailwind-indicator"
 import { ThemeProvider } from "@/components/misc/theme-provider"
 import { Header } from "@/components/navigation/app/header"
+import DashboardLayout from "@/components/layout/dashboard/DashboardLayout"
 
 // export const metadata: Metadata = {
 //   title: {
@@ -47,24 +49,39 @@ export default function RootLayout({ children }: RootLayoutProps) {
         >
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             {/* <Seo> */}
-            <div className="relative flex min-h-screen flex-col">
-              {pathname.startsWith("/admin") ? (
+            {/* <div className="relative flex min-h-screen flex-col"> */}
+            <div >
+              {/* {pathname.startsWith("/admin") ? (
                 <div className="flex-none">
-                  <Header />
+                  <AppLayout>
+                    <div className="flex-1">{children}</div>
+                  </AppLayout>
                 </div>
               ) : null}
               {pathname.startsWith("/app") ? (
                 <div className="flex-none">
-                  <Header />
+                  <AppLayout>
+                    <div className="flex-1">{children}</div>
+                  </AppLayout>
                 </div>
               ) : null}
               {publicRoutes.includes(pathname) ? null : (
                 <div className="flex-none">
-                  <Header />
+                  <AppLayout>
+                    <div className="flex-1">{children}</div>
+                  </AppLayout>
                 </div>
-              )}
-              <Header />
-              <div className="flex-1">{children}</div>
+              )} */}
+                 {!pathname.startsWith("/admin") ? (
+                <div className="flex-none">
+                  <AppLayout>
+                    <div className="flex-1">{children}</div>
+                  </AppLayout>
+                </div>
+              ) : 
+              <div className="flex-none">
+                <DashboardLayout>{children}</DashboardLayout>
+              </div> }
             </div>
             <TailwindIndicator />
             {/* </Seo> */}
