@@ -1,3 +1,6 @@
+import getConfig from "next/config"
+
+const { publicRuntimeConfig } = getConfig()
 export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
@@ -27,15 +30,15 @@ export const siteConfig = {
     },
     {
       title: "Login",
-      href: "/login",
+      href: "/auth/login",
     },
   ],
   links: {
     home: "/",
     about: "/about",
     blog: "/blog",
-    login: "/login",
-    signup: "/signup",
+    login: "/auth/login",
+    signup: "/auth/signup",
     contact: "/contact",
     privacyPolicy: "/privacy-policy",
     termsAndConditions: "/terms-and-conditions",
@@ -57,7 +60,7 @@ export const siteConfig = {
     },
     {
       name: "Github",
-      url: "https://github.com/fdagreat",
+      url: "https://github.com/fredygerman",
       asset: "/github.svg",
     },
     {
@@ -83,4 +86,7 @@ export const siteConfig = {
       asset: "/phone.svg",
     },
   ],
+  version: publicRuntimeConfig?.version || "unknown",
+  author: "@fredygerman",
+  authorUrl: "https://github.com/fredygerman",
 }

@@ -14,7 +14,7 @@ export function MainNav({ items }: MainNavProps) {
   return (
     <>
       {/* Desktop navbar */}
-      <div className="hidden px-1 md:flex md:items-center md:justify-between md:gap-6">
+      <nav className="hidden px-1 md:flex md:items-center md:justify-between md:gap-6">
         {items?.length ? (
           <nav className="flex gap-6">
             {items?.map(
@@ -34,17 +34,15 @@ export function MainNav({ items }: MainNavProps) {
             )}
           </nav>
         ) : null}
-      </div>
+      </nav>
 
       {/* Mobile navbar */}
 
-      <div className="flex items-center justify-between px-1 md:hidden">
-         <Link href="/" className="flex items-start space-x-2">
+      <nav className="flex items-center justify-between px-1 md:hidden">
+        <Link href="/" className="flex items-start space-x-2">
           <Icons.menu className="h-4 w-4" />
         </Link>
-      </div>
-      
-       
+      </nav>
     </>
   )
 }
