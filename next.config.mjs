@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
-const { version } = require("./package.json")
+// const { version } = require("./package.json") !TODO fix this later
+// import { siteConfig } from "@/config/site"
+
+const version = "0.0.1"
 const nextConfig = {
   reactStrictMode: true,
   publicRuntimeConfig: {

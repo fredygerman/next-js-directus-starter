@@ -1,6 +1,6 @@
 import getConfig from "next/config"
 
-const { publicRuntimeConfig } = getConfig()
+// const { publicRuntimeConfig } = getConfig()
 export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
@@ -13,7 +13,7 @@ export const siteConfig = {
   type: "website",
   twitterHandle: "@fredygerman_",
   description:
-    "Amazing starter with Next.js, TypeScript, ESLint, Prettier, chadcn-ui",
+    "Amazing starter with Directus Next.js, TypeScript, ESLint, Prettier, chadcn-ui",
   mainNav: [
     {
       title: "Home",
@@ -86,7 +86,8 @@ export const siteConfig = {
       asset: "/phone.svg",
     },
   ],
-  version: publicRuntimeConfig?.version || "unknown",
+  // version: publicRuntimeConfig?.version || "unknown",
+  version: "0.0.1",
   author: "@fredygerman",
   authorUrl: "https://github.com/fredygerman",
 }
