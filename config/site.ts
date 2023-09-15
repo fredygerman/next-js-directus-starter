@@ -32,6 +32,10 @@ export const siteConfig = {
       title: "Login",
       href: "/auth/login",
     },
+    {
+      title: "Sign In",
+      href: "/auth/signin",
+    },
   ],
   links: {
     home: "/",
