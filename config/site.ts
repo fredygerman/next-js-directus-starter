@@ -88,6 +88,7 @@ export const siteConfig = {
   ],
   // version: publicRuntimeConfig?.version || "unknown",
   version: "0.0.1",
-  author: "@fredygerman",
+  author: "fredygerman", // make sure this is also your github username
   authorUrl: "https://github.com/fredygerman",
+  gitHubApiRepoName: "fredygerman/next-js-directus-starter",
 }
