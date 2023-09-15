@@ -7,6 +7,7 @@ import {
 } from "lucide-react"
 
 export type Icon = LucideIcon
+type IconProps = React.HTMLAttributes<SVGElement>
 
 export const Icons = {
   sun: SunMedium,
@@ -44,7 +45,7 @@ export const Icons = {
       ></path>
     </svg>
   ),
-   facebook: (props: LucideProps) => (
+  facebook: (props: LucideProps) => (
     <svg viewBox="0 0 512 512" {...props}>
       <path
         fill="currentColor"
@@ -66,6 +67,22 @@ export const Icons = {
         fill="currentColor"
         d="M437.5 0h-363C37.5 0 0 37.5 0 83.5v345c0 46 37.5 83.5 83.5 83.5h363c46 0 83.5-37.5 83.5-83.5v-345C512 37.5 474.5 0 437.5 0zM153.5 416h-61v-200h61v200zm-30.5-230c-20.5 0-37-16.5-37-37s16.5-37 37-37 37 16.5 37 37-16.5 37-37 37zm307 230h-61v-105c0-25.5-20.5-46-46-46s-46 20.5-46 46v105h-61v-200h61v27.5c15.5-20.5 43.5-27.5 66.5-27.5 61 0 111 50 111 111v89z"
       ></path>
+    </svg>
+  ),
+  spinner: (props: IconProps) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M21 12a9 9 0 1 1-6.219-8.56" />
     </svg>
   ),
 }
