@@ -11,15 +11,13 @@ export default function IndexPage() {
           Beautifully designed components <br className="hidden sm:inline" />
           built with Radix UI and Tailwind CSS.
         </h1>
-        <p className="max-w-[700px] text-lg text-muted-foreground">
-        AUTH
-        </p>
+        <p className="max-w-[700px] text-lg text-muted-foreground">AUTH</p>
       </div>
       <div className="flex gap-4">
         <Link
           href={
             siteConfig.socials.find((social) => social.name === "twitter")
-              ?.url ?? ""
+              ?.url ?? "#"
           }
           target="_blank"
           rel="noreferrer"
@@ -32,7 +30,7 @@ export default function IndexPage() {
           rel="noreferrer"
           href={
             siteConfig.socials.find((social) => social.name === "github")
-              ?.url ?? ""
+              ?.url ?? "#"
           }
           className={buttonVariants({ variant: "outline" })}
         >

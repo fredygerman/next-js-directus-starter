@@ -31,7 +31,7 @@ export function DashboardHeader() {
             <Link
               href={
                 siteConfig.socials.find((social) => social.name === "Github")
-                  ?.url ?? ""
+                  ?.url ?? "#"
               }
               target="_blank"
               rel="noreferrer"
@@ -49,7 +49,7 @@ export function DashboardHeader() {
             <Link
               href={
                 siteConfig.socials.find((social) => social.name === "Twitter")
-                  ?.url ?? ""
+                  ?.url ?? "#"
               }
               target="_blank"
               rel="noreferrer"

@@ -100,7 +100,7 @@ export function AppFooter() {
               href={
                 siteConfig.contacts.find(
                   (contact) => contact.name === "Customer Service"
-                )?.url ?? ""
+                )?.url ?? "#"
               }
               target="_blank"
               rel="noreferrer"
