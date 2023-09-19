@@ -22,14 +22,6 @@ import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
 
 const accountFormSchema = z.object({
-  name: z
-    .string()
-    .min(2, {
-      message: "Name must be at least 2 characters.",
-    })
-    .max(30, {
-      message: "Name must not be longer than 30 characters.",
-    }),
   email: z.string().email({
     message: "Please enter a valid email.",
   }),
@@ -51,7 +43,7 @@ const defaultValues: Partial<AccountFormValues> = {
   // dob: new Date("2023-01-23"),
 }
 
-export function UserAuthForm() {
+export function LoginAuthForm() {
   const router = useRouter()
   const form = useForm<AccountFormValues>({
     resolver: zodResolver(accountFormSchema),
@@ -72,24 +64,6 @@ export function UserAuthForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Name</FormLabel>
-              <FormControl>
-                <Input placeholder="Your name" {...field} />
-              </FormControl>
-              {/* <FormDescription>
-                This is the name that will be displayed on your profile and in
-                emails.
-              </FormDescription> */}
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
         <FormField
           control={form.control}
           name="email"
@@ -124,10 +98,10 @@ export function UserAuthForm() {
 
         <div className="flex flex-row space-x-2">
           <Button type="submit" className={cn("w-1/2 ")}>
-            Sign In with Email
+            Login
           </Button>
-          <Link href="/auth/login" className={cn("w-1/2 text-center ")}>
-            <Button variant="ghost">Login</Button>
+          <Link href="/auth/sign-in" className={cn("w-1/2 text-center ")}>
+            <Button variant="ghost">Sign In</Button>
           </Link>
         </div>
         {/* forgot password  */}
