@@ -1,5 +1,7 @@
 "use client"
 
+import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { format } from "date-fns"
 import { useForm } from "react-hook-form"
@@ -28,12 +30,17 @@ const accountFormSchema = z.object({
     .max(30, {
       message: "Name must not be longer than 30 characters.",
     }),
-  dob: z.date({
-    required_error: "A date of birth is required.",
+  email: z.string().email({
+    message: "Please enter a valid email.",
   }),
-  language: z.string({
-    required_error: "Please select a language.",
-  }),
+  password: z
+    .string()
+    .min(8, {
+      message: "Password must be at least 8 characters.",
+    })
+    .max(100, {
+      message: "Password must not be longer than 100 characters.",
+    }),
 })
 
 type AccountFormValues = z.infer<typeof accountFormSchema>
@@ -45,6 +52,7 @@ const defaultValues: Partial<AccountFormValues> = {
 }
 
 export function UserAuthForm() {
+  const router = useRouter()
   const form = useForm<AccountFormValues>({
     resolver: zodResolver(accountFormSchema),
     defaultValues,
@@ -54,8 +62,8 @@ export function UserAuthForm() {
     toast({
       title: "You submitted the following values:",
       description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+        <pre className="mt-2 w-[340px] rounded-md bg-background p-4">
+          <code className="text-primary">{JSON.stringify(data, null, 2)}</code>
         </pre>
       ),
     })
@@ -73,10 +81,24 @@ export function UserAuthForm() {
               <FormControl>
                 <Input placeholder="Your name" {...field} />
               </FormControl>
-              <FormDescription>
+              {/* <FormDescription>
                 This is the name that will be displayed on your profile and in
                 emails.
-              </FormDescription>
+              </FormDescription> */}
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input placeholder="Your email" {...field} />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}
@@ -99,7 +121,26 @@ export function UserAuthForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Sign In with Email</Button>
+
+        <div className="flex flex-row space-x-2">
+          <Button type="submit" className={cn("w-1/2 ")}>
+            Sign In with Email
+          </Button>
+          <Link href="/auth/login" className={cn("w-1/2 text-center ")}>
+            <Button variant="ghost">Login</Button>
+          </Link>
+        </div>
+        {/* forgot password  */}
+        <div className="flex flex-row justify-center">
+          <Link
+            href="/auth/forgot-password"
+            className={cn("w-1/2 text-center ")}
+          >
+            <span className=" underline text-sm text-muted-foreground  hover:text-primary">
+              Forgot Password?
+            </span>
+          </Link>
+        </div>
       </form>
     </Form>
   )
