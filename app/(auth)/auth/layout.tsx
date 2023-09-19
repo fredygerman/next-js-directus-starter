@@ -20,8 +20,6 @@ export default function AuthLayout({
         fontSans.variable
       )}
     >
-      {/* Include shared UI here e.g. a header or sidebar */}
-
       <nav></nav>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
         <div className="md:hidden">

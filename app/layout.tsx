@@ -1,10 +1,10 @@
 import "@/styles/globals.css"
 import { Metadata } from "next"
-import { headers } from "next/headers"
 
 import { siteConfig } from "@/config/site"
 import { fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
+import { MyDirectusProvider } from "@/components/misc/directus-provider"
 import Seo from "@/components/misc/seo"
 import { TailwindIndicator } from "@/components/misc/tailwind-indicator"
 
@@ -64,11 +64,7 @@ interface RootLayoutProps {
   children: React.ReactNode
 }
 
-const publicRoutes = ["/", "/login", "/signup", "/forgot-password"]
-
 export default function RootLayout({ children }: RootLayoutProps) {
-  const headersList = headers()
-
   return (
     <>
       <html lang="en" suppressHydrationWarning>
@@ -80,9 +76,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
           )}
         >
           {/* <Seo> */}
-
-          <div className="relative flex min-h-screen flex-col">{children}</div>
-
+          <MyDirectusProvider>
+            <div className="relative flex min-h-screen flex-col">
+              {children}
+            </div>
+          </MyDirectusProvider>
           <TailwindIndicator />
           {/* </Seo> */}
         </body>

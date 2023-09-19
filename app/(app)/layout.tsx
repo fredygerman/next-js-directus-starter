@@ -16,15 +16,12 @@ export default function PublicLayout({
         fontSans.variable
       )}
     >
-      {/* Include shared UI here e.g. a header or sidebar */}
-
       <nav>
         <AppHeader />
       </nav>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
         {children}
       </ThemeProvider>
-
       <AppFooter />
     </section>
   )

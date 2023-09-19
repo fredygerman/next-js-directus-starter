@@ -15,8 +15,6 @@ export default function DashboardLayout({
         fontSans.variable
       )}
     >
-      {/* Include shared UI here e.g. a header or sidebar */}
-
       <nav>
         <DashboardHeader />
       </nav>
