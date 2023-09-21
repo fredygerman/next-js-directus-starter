@@ -1,12 +1,15 @@
 import "@/styles/globals.css"
 import { Metadata } from "next"
 
+import { RootLayoutProps } from "@/types/general"
 import { siteConfig } from "@/config/site"
 import { fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
 import { ProgressBar } from "@/components/misc/progress"
-import Seo from "@/components/misc/seo"
+import CustomProvider from "@/components/misc/state-provider"
+// import Seo from "@/components/misc/seo"
 import { TailwindIndicator } from "@/components/misc/tailwind-indicator"
+import { ToasterWrapper } from "@/components/misc/toaster-wrapper"
 
 export const metadata: Metadata = {
   title: {
@@ -60,10 +63,6 @@ export const metadata: Metadata = {
   manifest: `${siteConfig.links.home}/site.webmanifest`,
 }
 
-interface RootLayoutProps {
-  children: React.ReactNode
-}
-
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
@@ -76,10 +75,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
           )}
         >
           {/* <Seo> */}
-          {/* <MyDirectusProvider> */}
           <ProgressBar />
-          <div className="relative flex min-h-screen flex-col">{children}</div>
-          {/* </MyDirectusProvider> */}
+          <CustomProvider>
+            <div className="relative flex min-h-screen flex-col">
+              {children}
+            </div>
+          </CustomProvider>
+          <ToasterWrapper />
           <TailwindIndicator />
           {/* </Seo> */}
         </body>
