@@ -6,7 +6,6 @@ export const env = createEnv({
     // This is optional because it's only used in development.
     // See https://next-auth.js.org/deployment.
     //  DIRECTUS_URL: z.string().min(1), // this is how all the validation should be but for now since none of these are required we can leave them as optional
-    DIRECTUS_URL: z.string().url().optional(),
     DIRECTUS_PROJECT_NAME: z.string().optional(),
     GITHUB_CLIENT_ID: z.string().optional(),
     GITHUB_CLIENT_SECRET: z.string().optional(),
@@ -18,6 +17,7 @@ export const env = createEnv({
   },
   client: {
     NEXT_PUBLIC_APP_URL: z.string(),
+    DIRECTUS_URL: z.string(),
   },
   runtimeEnv: {
     DIRECTUS_URL: process.env.DIRECTUS_URL,

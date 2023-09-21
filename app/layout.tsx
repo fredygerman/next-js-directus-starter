@@ -4,7 +4,7 @@ import { Metadata } from "next"
 import { siteConfig } from "@/config/site"
 import { fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
-import { MyDirectusProvider } from "@/components/misc/directus-provider"
+// import { MyDirectusProvider } from "@/components/misc/directus-provider"
 import Seo from "@/components/misc/seo"
 import { TailwindIndicator } from "@/components/misc/tailwind-indicator"
 
@@ -76,11 +76,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
           )}
         >
           {/* <Seo> */}
-          <MyDirectusProvider>
-            <div className="relative flex min-h-screen flex-col">
-              {children}
-            </div>
-          </MyDirectusProvider>
+          {/* <MyDirectusProvider> */}
+          <div className="relative flex min-h-screen flex-col">{children}</div>
+          {/* </MyDirectusProvider> */}
           <TailwindIndicator />
           {/* </Seo> */}
         </body>
