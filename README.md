@@ -1,20 +1,33 @@
-# next-template
+# next-js-directus-starter
 
-A Next.js 13 template for building apps with Radix UI and Tailwind CSS.
+Next.js 13 starter for building apps with Directus CMS Radix UI and Tailwind CSS.
 
 ## Usage
 
 ```bash
-npx create-next-app -e https://github.com/shadcn/next-template
+git clone https://github.com/fredygerman/next-js-directus-starter.git
+```
+
+```bash
+cd next-js-directus-starter
+```
+
+```bash
+pnpm install
+```
+
+```bash
+pnpm run dev
 ```
 
 ## Features
 
 - Next.js 13 App Directory
+- Directus CMS
 - Radix UI Primitives
 - Tailwind CSS
 - Icons from [Lucide](https://lucide.dev)
-- Dark mode with `next-themes`
+- Themes with next-themes and Tailwind CSS
 - Tailwind CSS class sorting, merging and linting.
 
 ## License
