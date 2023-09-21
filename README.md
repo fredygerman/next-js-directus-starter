@@ -30,6 +30,13 @@ pnpm run dev
 - Themes with next-themes and Tailwind CSS
 - Tailwind CSS class sorting, merging and linting.
 
+## Customizations and configurations.
+
+- Site Config (site.ts) for Site Information configuration (i.e Name, Title, Nav Bar items, Links etc).
+- Response Messages Config (messages.ts) for Creating user friendly response messages.
+- @t3-oss/env-nextjs For Environment Variables configuration. (env.mjs)
+- and other config files. (tailwind.config.js, postcss.config.js, next.config, prettier.config.js)
+
 ## License
 
 Licensed under the [MIT license](https://github.com/shadcn/ui/blob/main/LICENSE.md).
