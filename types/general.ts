@@ -1,28 +1,38 @@
+import { ReactElement, ReactNode } from "react"
 import { NextPage } from "next"
 import { AppProps } from "next/app"
-import { ReactElement, ReactNode } from "react"
 
 export type children = {
-      children: ReactNode,
+  children: ReactNode
 }
 
 export type LayoutPropsTypes = {
-      children: ReactNode,
-      title?: string,
-      description?: string,
+  children: ReactNode
+  title?: string
+  description?: string
 }
 
 export type NextPageWithLayout = NextPage & {
-      getLayout?: (page: ReactElement) => ReactNode
+  getLayout?: (page: ReactElement) => ReactNode
 }
 
 export type AppPropsWithLayout = AppProps & {
-      Component: NextPageWithLayout
+  Component: NextPageWithLayout
+}
+
+export type RootLayoutProps = {
+  children: React.ReactNode
 }
 
 export interface IMenu {
-      description: string;
-      icon: string;
-      link: string;
-      title: string;
+  description: string
+  icon: string
+  link: string
+  title: string
+}
+
+export type FormActionResponse = {
+  data?: any
+  message: string
+  success: boolean
 }
