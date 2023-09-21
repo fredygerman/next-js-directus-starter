@@ -2,8 +2,10 @@
 
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import login from "@/actions/formActions"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { format } from "date-fns"
+import { useDirectus } from "react-directus"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
@@ -50,7 +52,12 @@ export function LoginAuthForm() {
     defaultValues,
   })
 
-  function onSubmit(data: AccountFormValues) {
+  const onSubmit = async (data: AccountFormValues) => {
+    const { email, password } = data
+
+    const result = await login(email, password)
+    console.log(result)
+
     toast({
       title: "You submitted the following values:",
       description: (

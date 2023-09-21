@@ -1,5 +1,7 @@
 import getConfig from "next/config"
 
+import { env } from "@/env.mjs"
+
 // const { publicRuntimeConfig } = getConfig()
 export type SiteConfig = typeof siteConfig
 
@@ -8,6 +10,8 @@ export const siteConfig = {
   name: "Next-js-directus-starter",
   canonical: "https://nextjs-starter-shadcn.vercel.app/",
   domain: "https://nextjs-starter-shadcn.vercel.app/",
+  // directusUrl: env.DIRECTUS_URL,
+  nextUrl: env.NEXT_PUBLIC_APP_URL,
   image:
     "https://storage.googleapis.com/brandflow-bucket/personal/blog/portfolio-og.jpg",
   type: "website",
