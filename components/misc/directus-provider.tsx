@@ -13,7 +13,7 @@ export function MyDirectusProvider({ children }: any) {
   // const client = createDirectus('directus_project_url').with(authentication()).with(rest());
 
   return (
-    <DirectusProvider apiUrl={`${env.DIRECTUS_URL}`} options={{}}>
+    <DirectusProvider apiUrl={``} options={{}}>
       {children}
     </DirectusProvider>
   )
