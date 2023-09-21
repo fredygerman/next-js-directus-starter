@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import login from "@/actions/formActions"
+import { login } from "@/actions/authForms"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { format } from "date-fns"
 import { useDirectus } from "react-directus"

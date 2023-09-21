@@ -2,17 +2,18 @@
 
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { register } from "@/actions/authForms"
+import { setAuthState } from "@/store/slices/auth"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { format } from "date-fns"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
 import { cn } from "@/lib/utils"
+import { useStoreDispatch } from "@/hooks/useStore"
 import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -22,14 +23,14 @@ import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
 
 const accountFormSchema = z.object({
-  name: z
-    .string()
-    .min(2, {
-      message: "Name must be at least 2 characters.",
-    })
-    .max(30, {
-      message: "Name must not be longer than 30 characters.",
-    }),
+  first_name: z.string().min(2, {
+    message: "Name must be at least 2 characters.",
+  }),
+
+  last_name: z.string().min(2, {
+    message: "Name must be at least 2 characters.",
+  }),
+
   email: z.string().email({
     message: "Please enter a valid email.",
   }),
@@ -46,27 +47,42 @@ const accountFormSchema = z.object({
 type AccountFormValues = z.infer<typeof accountFormSchema>
 
 // This can come from your database or API.
-const defaultValues: Partial<AccountFormValues> = {
-  // name: "Your name",
-  // dob: new Date("2023-01-23"),
-}
+const defaultValues: Partial<AccountFormValues> = {}
 
-export function UserAuthForm() {
+export function SignInAuthForm() {
   const router = useRouter()
+  const dispatch = useStoreDispatch()
   const form = useForm<AccountFormValues>({
     resolver: zodResolver(accountFormSchema),
     defaultValues,
   })
 
-  function onSubmit(data: AccountFormValues) {
+  const onSubmit = async (data: AccountFormValues) => {
+    const { email, password, first_name, last_name } = data
+    const registerResult = await register(
+      email,
+      password,
+      first_name,
+      last_name
+    )
+    console.log("Login Result : ", registerResult)
+
     toast({
-      title: "You submitted the following values:",
+      title: registerResult.success ? "Success 🥳 " : "Error 🫤",
+      variant: registerResult.success ? "default" : "destructive",
       description: (
         <pre className="mt-2 w-[340px] rounded-md bg-background p-4">
-          <code className="text-primary">{JSON.stringify(data, null, 2)}</code>
+          <code className="text-primary">{registerResult.message}</code>
         </pre>
       ),
     })
+
+    if (registerResult.success) {
+      dispatch(setAuthState(registerResult.data))
+      // wait for 2 seconds
+      await new Promise((resolve) => setTimeout(resolve, 2000))
+      router.push("/dashboard")
+    }
   }
 
   return (
@@ -74,17 +90,26 @@ export function UserAuthForm() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
-          name="name"
+          name="first_name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>First Name</FormLabel>
               <FormControl>
                 <Input placeholder="Your name" {...field} />
               </FormControl>
-              {/* <FormDescription>
-                This is the name that will be displayed on your profile and in
-                emails.
-              </FormDescription> */}
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="last_name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Last Name</FormLabel>
+              <FormControl>
+                <Input placeholder="Your name" {...field} />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}

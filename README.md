@@ -29,12 +29,20 @@ pnpm run dev
 - Icons from [Lucide](https://lucide.dev)
 - Themes with next-themes and Tailwind CSS
 - Tailwind CSS class sorting, merging and linting.
+- Next js Server Side Components (SSC) & Client Side Components (CSC)
+- Next js Form Actions
+
+## Roadmap
+
+- [🚧] Add Login and Register
+- [ ] Add Password Reset and Forgot Password
+- [ ] Add User Profile
 
 ## Customizations and configurations.
 
 - Site Config (site.ts) for Site Information configuration (i.e Name, Title, Nav Bar items, Links etc).
 - Response Messages Config (messages.ts) for Creating user friendly response messages.
-- @t3-oss/env-nextjs For Environment Variables configuration. (env.mjs)
+- [@t3-oss/env-nextjs](https://create.t3.gg/en/usage/env-variables) For Environment Variables configuration. (env.mjs)
 - and other config files. (tailwind.config.js, postcss.config.js, next.config, prettier.config.js)
 
 ## License

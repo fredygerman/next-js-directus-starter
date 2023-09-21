@@ -1,6 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
+import { forgotPassword } from "@/actions/authForms"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
@@ -33,7 +34,10 @@ export function ForgotPasswordAuthForm() {
     resolver: zodResolver(accountFormSchema),
   })
 
-  function onSubmit(data: AccountFormValues) {
+  const onSubmit = async (data: AccountFormValues) => {
+    const { email } = data
+    const result = await forgotPassword(email)
+    console.log(result)
     toast({
       title: "You submitted the following values:",
       description: (
