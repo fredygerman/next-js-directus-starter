@@ -16,10 +16,10 @@ export default function PublicLayout({
         fontSans.variable
       )}
     >
-      <nav>
-        <AppHeader />
-      </nav>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <nav>
+          <AppHeader />
+        </nav>
         {children}
       </ThemeProvider>
       <AppFooter />
