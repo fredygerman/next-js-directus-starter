@@ -81,7 +81,7 @@ export function SignInAuthForm() {
       dispatch(setAuthState(registerResult.data))
       // wait for 2 seconds
       await new Promise((resolve) => setTimeout(resolve, 2000))
-      router.push("/dashboard")
+      router.push("/")
     }
   }
 

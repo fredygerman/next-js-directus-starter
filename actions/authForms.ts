@@ -4,6 +4,7 @@ import { FormActionResponse } from "@/types/general"
 import { userData } from "@/types/user"
 import { env } from "@/env.mjs"
 import { sendDirectusApiRequest } from "@/lib/directusApi"
+import { getResponseMessage } from "@/lib/utils"
 
 const forgotPassword = async (email: string): Promise<FormActionResponse> => {
   const endpoint = "/auth/password/request"
@@ -70,8 +71,8 @@ const register = async (
 
   if (registrationResponse.success) {
     // from registration response remove password , and token
-    delete registrationResponse.data?.password
-    delete registrationResponse.data?.token
+    delete registrationResponse.data?.data?.password
+    // delete registrationResponse.data?.data?.token
 
     const loginResponse = await login(email, password)
 
@@ -80,7 +81,8 @@ const register = async (
     }
 
     if (loginResponse.success) {
-      const user: userData = registrationResponse.data.data
+      const user: userData = registrationResponse.data?.data
+      console.log("user is : ", user)
       const tokenExpirationAdjustmentTime: number =
         (env?.DIRECTUS_TOKEN_EXPIRATION_ADJUSTMENT as unknown as number) ||
         86400
@@ -95,13 +97,14 @@ const register = async (
               1000
         ).toUTCString(),
       }
+      const data = {
+        user,
+        auth,
+      }
       // console.log("we have logged in the user", user, auth)
       return {
-        data: {
-          user,
-          auth,
-        },
-        message: "You have successfully been registered and logged in",
+        data,
+        message: `You have successfully \nregistered and logged in`,
         success: true,
       }
     }

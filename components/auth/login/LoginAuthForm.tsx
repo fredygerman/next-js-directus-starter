@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { login } from "@/actions/authForms"
+import { logoutUser } from "@/store/slices/auth"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { format } from "date-fns"
 import { useDirectus } from "react-directus"
@@ -10,6 +11,7 @@ import { useForm } from "react-hook-form"
 import * as z from "zod"
 
 import { cn } from "@/lib/utils"
+import { useStoreDispatch } from "@/hooks/useStore"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -46,6 +48,20 @@ const defaultValues: Partial<AccountFormValues> = {
 }
 
 export function LoginAuthForm() {
+  const dispatch = useStoreDispatch()
+  // check if there is a localStorage logged-out item, tell user they have been logged out and remove the item
+  if (typeof window !== "undefined") {
+    if (localStorage.getItem("logged-out")) {
+      dispatch(logoutUser())
+      toast({
+        title: "Oh no! Your Session Expired.",
+        description: "Please log in again.",
+        variant: "destructive",
+      })
+      localStorage.removeItem("logged-out")
+    }
+  }
+
   const router = useRouter()
   const form = useForm<AccountFormValues>({
     resolver: zodResolver(accountFormSchema),

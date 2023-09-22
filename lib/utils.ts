@@ -10,6 +10,12 @@ export function cn(...inputs: ClassValue[]) {
 export async function getResponseMessage(data: any) {
   // check if data is an object and if  data.errors[0].extensions.code exists in data object, if it does
   // then return the message from responseMessages object, if not return the default message
+  if (typeof data === "object" && data.errors && data.errors[0].message) {
+    return data.errors[0].message ===
+      `Value for field "email" in collection "directus_users" has to be unique.`
+      ? "An account with this email \nalready exists, please log in \nor use a different email"
+      : data.errors[0].message
+  }
 
   if (
     typeof data === "object" &&
@@ -18,7 +24,10 @@ export async function getResponseMessage(data: any) {
   ) {
     if (data.errors[0].extensions.code === "TOKEN_EXPIRED") {
       // !TODO: call logout function here to clear local storage
-      return "Your session has expired, please log in again"
+      localStorage.removeItem("persist:root")
+      localStorage.clear()
+      localStorage.setItem("logged-out", "true")
+      window.location.href = "/auth/login"
     }
     const errorMessage =
       responseMessages[
