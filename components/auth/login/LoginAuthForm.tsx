@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { login } from "@/actions/authForms"
-import { logoutUser } from "@/store/slices/auth"
+import { logoutUser, setAuthState } from "@/store/slices/auth"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { format } from "date-fns"
 import { useDirectus } from "react-directus"
@@ -71,17 +71,25 @@ export function LoginAuthForm() {
   const onSubmit = async (data: AccountFormValues) => {
     const { email, password } = data
 
-    const result = await login(email, password)
-    console.log(result)
+    const loginResult = await login(email, password)
+    console.log("login result :", loginResult)
 
     toast({
-      title: "You submitted the following values:",
+      title: loginResult.success ? "Success 🥳 " : "Error 🫤",
+      variant: loginResult.success ? "default" : "destructive",
       description: (
         <pre className="mt-2 w-[340px] rounded-md bg-background p-4">
-          <code className="text-primary">{JSON.stringify(data, null, 2)}</code>
+          <code className="text-primary">{loginResult.message}</code>
         </pre>
       ),
     })
+
+    if (loginResult.success) {
+      dispatch(setAuthState(loginResult.data))
+      // await 2 seconds to allow the auth state to be set
+      await new Promise((resolve) => setTimeout(resolve, 2000))
+      router.push("/")
+    }
   }
 
   return (

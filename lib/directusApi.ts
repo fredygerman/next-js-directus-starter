@@ -35,28 +35,43 @@ export const sendDirectusApiRequest = async (
   method: string,
   bodyData: any,
   useAuthHeader: boolean = false,
-  isRegistering: boolean = false
+  cache: boolean = false
 ) => {
   try {
-    const headers: Record<string, string> = {
+    let headers: Record<string, string> = {
       "Content-Type": "application/json",
     }
 
-    const token = isRegistering
-      ? env.DIRECTUS_USER_CHEATER_TOKEN
-      : bodyData?.access_token
+    const isRegistering = endpoint === "/users" && method === "POST"
 
     if (useAuthHeader) {
+      const token = isRegistering
+        ? env.DIRECTUS_USER_CHEATER_TOKEN
+        : bodyData?.access_token // maybe we should just always keep the token in the local storage and use it from there
+
+      console.log("token used is : ", token)
+
       headers["Authorization"] = `Bearer ${token}`
+    }
+
+    if (!cache) {
+      const response = await fetch(`${env.DIRECTUS_URL}${endpoint}`, {
+        method: method,
+        headers: headers,
+        body: method === "GET" ? undefined : JSON.stringify(bodyData),
+        cache: "no-store",
+      })
+      console.log("response from", endpoint, "is : ", JSON.stringify(response))
+
+      return handleApiResponse(response)
     }
 
     const response = await fetch(`${env.DIRECTUS_URL}${endpoint}`, {
       method: method,
       headers: headers,
-      body: JSON.stringify(bodyData),
+      body: method === "GET" ? undefined : JSON.stringify(bodyData),
     })
-
-    console.log("response from", endpoint, "is : ", response)
+    console.log("response from", endpoint, "is : ", JSON.stringify(response))
 
     return handleApiResponse(response)
   } catch (err) {

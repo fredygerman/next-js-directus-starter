@@ -41,7 +41,43 @@ const login = async (
   const method = "POST"
   const bodyData = { email, password }
 
-  return sendDirectusApiRequest(endpoint, method, bodyData)
+  const loginResponse = await sendDirectusApiRequest(endpoint, method, bodyData)
+
+  if (loginResponse.success) {
+    const tokenExpirationAdjustmentTime: number =
+      (env.DIRECTUS_TOKEN_EXPIRATION_ADJUSTMENT as unknown as number) || 86400
+
+    const auth = {
+      access_token: loginResponse?.data?.data?.access_token,
+      refresh_token: loginResponse?.data?.data?.refresh_token,
+      expires_in: new Date(
+        new Date().getTime() +
+          (loginResponse.data?.data?.expires - tokenExpirationAdjustmentTime) *
+            1000
+      ).toUTCString(),
+    }
+
+    const getCurrentUserResponse = await getCurrentUser(auth.access_token)
+
+    if (!getCurrentUserResponse.success) {
+      return getCurrentUserResponse
+    }
+
+    const user: userData = getCurrentUserResponse.data?.data
+
+    const data = {
+      user,
+      auth,
+    }
+
+    return {
+      data,
+      message: `You have successfully logged in`,
+      success: true,
+    }
+  }
+
+  return loginResponse
 }
 
 const register = async (
@@ -65,7 +101,6 @@ const register = async (
     endpoint,
     method,
     bodyData,
-    true,
     true
   )
 
@@ -122,8 +157,80 @@ const getCurrentUser = async (
     access_token,
   }
 
-  return sendDirectusApiRequest(endpoint, method, bodyData, true)
+  const getCurrentUserResponse = await sendDirectusApiRequest(
+    endpoint,
+    method,
+    bodyData,
+    true
+  )
+
+  if (getCurrentUserResponse.success) {
+    // from registration response remove password , and token
+    delete getCurrentUserResponse.data?.data?.password
+    // delete registrationResponse.data?.data?.token
+
+    const user: userData = getCurrentUserResponse.data?.data
+    console.log("user is : ", user)
+    return {
+      data: user,
+      message: `You have successfully \nregistered and logged in`,
+      success: true,
+    }
+  }
+
+  return {
+    message: "Unauthorized,  please log in again",
+    success: false,
+  }
 }
+
+// const getNewToken = async (
+//   refresh_token: string
+// ): Promise<FormActionResponse> => {
+//   const endpoint = "/auth/refresh"
+//   const method = "POST"
+//   const bodyData = {
+//     refresh_token,
+//     mode: "json",
+//   }
+
+//   const getNewTokenResponse = await sendDirectusApiRequest(
+//     endpoint,
+//     method,
+//     bodyData,
+//     true,
+//     false
+//   )
+
+//   if (getNewTokenResponse.success) {
+//     //  we will get new auth object
+//     const tokenExpirationAdjustmentTime: number =
+//       (env.DIRECTUS_TOKEN_EXPIRATION_ADJUSTMENT as unknown as number) || 86400
+
+//     const auth = {
+//       access_token: getNewTokenResponse?.data?.data?.access_token,
+//       refresh_token: getNewTokenResponse?.data?.data?.refresh_token,
+//       expires_in: new Date(
+//         new Date().getTime() +
+//           (getNewTokenResponse.data?.data?.expires -
+//             tokenExpirationAdjustmentTime) *
+//             1000
+//       ).toUTCString(),
+//     }
+
+//     console.log("new auth is : ", auth)
+//     return {
+//       data: auth,
+//       message: `New Auth object is created`,
+//       success: true,
+//     }
+//   }
+
+//   return {
+//     message: "Please log in again",
+//     success: false,
+//   }
+// }
 
 export {
   login,
