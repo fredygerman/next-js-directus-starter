@@ -1,16 +1,24 @@
+"use client"
+
 import * as React from "react"
 import Link from "next/link"
+import { storedUser } from "@/store/slices/auth"
 
-import { NavItem } from "@/types/nav"
-import { siteConfig } from "@/config/site"
+import { MainNavProps } from "@/types/general"
 import { cn } from "@/lib/utils"
+import { useStoreSelector } from "@/hooks/useStore"
 import { Icons } from "@/components/misc/icons"
 
-interface MainNavProps {
-  items?: NavItem[]
-}
-
 export function MainNav({ items }: MainNavProps) {
+  const user = useStoreSelector(storedUser)
+
+  // if we have the user we remove the login and sign in item on the nav bar
+  if (user && items) {
+    items = items.filter(
+      (item) => item.title !== "Login" && item.title !== "Sign In"
+    )
+  }
+
   return (
     <>
       {/* Desktop navbar */}
