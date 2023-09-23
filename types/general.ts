@@ -2,6 +2,8 @@ import { ReactElement, ReactNode } from "react"
 import { NextPage } from "next"
 import { AppProps } from "next/app"
 
+import { NavItem } from "@/types/nav"
+
 export type children = {
   children: ReactNode
 }
@@ -35,4 +37,8 @@ export type FormActionResponse = {
   data?: any
   message: string
   success: boolean
+}
+
+export type MainNavProps = {
+  items?: NavItem[]
 }

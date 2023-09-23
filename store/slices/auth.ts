@@ -28,7 +28,9 @@ export const authSlice = createSlice({
 
 export const { logoutUser, setAuthState, updateUser } = authSlice.actions
 
-export const user = (state: RootState) => state.auth.user
-export const token = (state: RootState) => state.auth.token
+export const storedUser = (state: RootState) => state.auth.user || null
+export const storedAuth = (state: RootState) => state.auth.auth || null
+export const storedToken = (state: RootState) =>
+  state.auth?.auth?.access_token || null
 
 export default authSlice.reducer

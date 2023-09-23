@@ -63,7 +63,7 @@ const login = async (
       return getCurrentUserResponse
     }
 
-    const user: userData = getCurrentUserResponse.data?.data
+    const user: userData = getCurrentUserResponse.data
 
     const data = {
       user,

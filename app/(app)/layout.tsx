@@ -10,7 +10,7 @@ export default function PublicLayout({
   children: React.ReactNode
 }) {
   return (
-    <section
+    <div
       className={cn(
         "min-h-screen bg-background font-sans antialiased",
         fontSans.variable
@@ -23,6 +23,6 @@ export default function PublicLayout({
         {children}
       </ThemeProvider>
       <AppFooter />
-    </section>
+    </div>
   )
 }

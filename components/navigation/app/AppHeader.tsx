@@ -3,6 +3,7 @@ import Link from "next/link"
 import { siteConfig } from "@/config/site"
 import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/misc/icons"
+import { ProfileIcon } from "@/components/misc/profile-icon"
 import { ThemeToggle } from "@/components/misc/theme-toggle"
 import { MainNav } from "@/components/navigation/main-nav"
 
@@ -46,7 +47,7 @@ export function AppHeader() {
                 <span className="sr-only">GitHub</span>
               </div>
             </Link>
-            <Link
+            {/* <Link
               href={
                 siteConfig.socials.find((social) => social.name === "Twitter")
                   ?.url ?? "#"
@@ -63,9 +64,9 @@ export function AppHeader() {
                 <Icons.twitter className="h-5 w-5 fill-current" />
                 <span className="sr-only">Twitter</span>
               </div>
-            </Link>
-
+            </Link> */}
             <ThemeToggle />
+            <ProfileIcon />
           </div>
         </div>
 

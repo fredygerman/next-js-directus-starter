@@ -72,7 +72,7 @@ export function LoginAuthForm() {
     const { email, password } = data
 
     const loginResult = await login(email, password)
-    console.log("login result :", loginResult)
+    // console.log("login result :", loginResult)
 
     toast({
       title: loginResult.success ? "Success 🥳 " : "Error 🫤",

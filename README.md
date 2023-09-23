@@ -34,7 +34,7 @@ pnpm run dev
 
 ## Roadmap
 
-- [🚧] Add Login and Register
+- [✅] Add Login and Register
 - [ ] Add Password Reset and Forgot Password
 - [ ] Add User Profile
 
