@@ -104,12 +104,19 @@ const register = async (
     true
   )
 
+  // console.log("registrationResponse is : ", registrationResponse)
+
   if (registrationResponse.success) {
     // from registration response remove password , and token
     delete registrationResponse.data?.data?.password
     // delete registrationResponse.data?.data?.token
 
-    const loginResponse = await login(email, password)
+    const loginResponse = await login(
+      registrationResponse.data.data.email,
+      password
+    )
+
+    // console.log("loginResponse is : ", loginResponse)
 
     if (!loginResponse.success) {
       return loginResponse
@@ -117,21 +124,7 @@ const register = async (
 
     if (loginResponse.success) {
       const user: userData = registrationResponse.data?.data
-      console.log("user is : ", user)
-      const tokenExpirationAdjustmentTime: number =
-        (env?.DIRECTUS_TOKEN_EXPIRATION_ADJUSTMENT as unknown as number) ||
-        86400
-
-      const auth = {
-        access_token: loginResponse?.data?.data?.access_token,
-        refresh_token: loginResponse?.data?.data?.refresh_token,
-        expires_in: new Date(
-          new Date().getTime() +
-            (loginResponse.data?.data?.expires -
-              tokenExpirationAdjustmentTime) *
-              1000
-        ).toUTCString(),
-      }
+      const auth = loginResponse.data?.auth
       const data = {
         user,
         auth,
