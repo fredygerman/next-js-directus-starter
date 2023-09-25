@@ -64,15 +64,10 @@ export default async function IndexPage() {
               Get Started
             </Link>
             <Link
-              href={
-                siteConfig.socials.find((social) => social.name === "Github")
-                  ?.url ?? "#"
-              }
-              target="_blank"
-              rel="noreferrer"
+              href="#features"
               className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
             >
-              GitHub
+              Features
             </Link>
           </div>
         </div>
