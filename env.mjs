@@ -8,7 +8,7 @@ export const env = createEnv({
     //  DIRECTUS_URL: z.string().min(1), // this is how all the validation should be but for now since none of these are required we can leave them as optional
     DIRECTUS_URL: z.string(),
     DIRECTUS_TOKEN_EXPIRATION_ADJUSTMENT: z.string(),
-    DIRECTUS_USER_CHEATER_TOKEN: z.string().optional(),
+    DIRECTUS_USER_CREATOR_TOKEN: z.string().optional(),
     DIRECTUS_DEFAULT_ROLE_ID: z.string(),
     DIRECTUS_PROJECT_NAME: z.string().optional(),
     GITHUB_CLIENT_ID: z.string().optional(),
@@ -27,7 +27,7 @@ export const env = createEnv({
     DIRECTUS_TOKEN_EXPIRATION_ADJUSTMENT:
       process.env.DIRECTUS_TOKEN_EXPIRATION_ADJUSTMENT,
     DIRECTUS_DEFAULT_ROLE_ID: process.env.DIRECTUS_DEFAULT_ROLE_ID,
-    DIRECTUS_USER_CHEATER_TOKEN: process.env.DIRECTUS_USER_CHEATER_TOKEN,
+    DIRECTUS_USER_CREATOR_TOKEN: process.env.DIRECTUS_USER_CREATOR_TOKEN,
     DIRECTUS_PROJECT_NAME: process.env.DIRECTUS_PROJECT_NAME,
     GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
     GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,

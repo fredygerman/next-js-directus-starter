@@ -46,7 +46,7 @@ export const sendDirectusApiRequest = async (
 
     if (useAuthHeader) {
       const token = isRegistering
-        ? env.DIRECTUS_USER_CHEATER_TOKEN
+        ? env.DIRECTUS_USER_CREATOR_TOKEN
         : bodyData?.access_token // maybe we should just always keep the token in the local storage and use it from there
 
       console.log("token used is : ", token)
