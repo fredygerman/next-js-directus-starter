@@ -58,8 +58,15 @@ pnpm run dev
 ## Roadmap
 
 - [✅] Add Login and Register
+- [ ] Add Analytics
+- [ ] Add Installation Instructions Documentation
+- [ ] Add Dashboard Page
+- [ ] Add Simple Blog
+- [ ] Add SEO
+- [ ] Add Auth Guard
 - [ ] Add Password Reset and Forgot Password
 - [ ] Add User Profile
+- [ ] Add User Settings
 
 ## Customizations and configurations.
 
