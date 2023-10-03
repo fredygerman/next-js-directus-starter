@@ -6,6 +6,7 @@ import {
   storedToken,
   storedUser,
 } from "@/store/slices/auth"
+import { usePostHog } from "posthog-js/react"
 
 import { useStoreDispatch, useStoreSelector } from "@/hooks/useStore"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -27,6 +28,7 @@ export function ProfileIcon() {
   const user = useStoreSelector(storedUser)
   const auth = useStoreSelector(storedAuth)
   const token = useStoreSelector(storedToken)
+  const posthog = usePostHog()
 
   // we can not get the user or auth from the store, so we will log them out and we return null
   if (!user || !auth || !token) {
@@ -38,6 +40,10 @@ export function ProfileIcon() {
     dispatch(logoutUser())
     // wait 1 second to show the toast
     setTimeout(() => {}, 1000)
+    posthog?.identify(user.id, {
+      email: user.email,
+    })
+    posthog?.capture("user_log_out")
     toast({
       title: "Logged Out 👋 ",
       variant: "default",
