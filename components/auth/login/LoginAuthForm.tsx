@@ -1,17 +1,19 @@
 "use client"
 
+import { useEffect } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { login } from "@/actions/authForms"
-import { logoutUser, setAuthState } from "@/store/slices/auth"
+import { logoutUser, setAuthState, storedUser } from "@/store/slices/auth"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { format } from "date-fns"
+import { usePostHog } from "posthog-js/react"
 import { useDirectus } from "react-directus"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
 import { cn } from "@/lib/utils"
-import { useStoreDispatch } from "@/hooks/useStore"
+import { useStoreDispatch, useStoreSelector } from "@/hooks/useStore"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -61,8 +63,10 @@ export function LoginAuthForm() {
       localStorage.removeItem("logged-out")
     }
   }
+  const posthog = usePostHog()
 
   const router = useRouter()
+  let user = useStoreSelector(storedUser)
   const form = useForm<AccountFormValues>({
     resolver: zodResolver(accountFormSchema),
     defaultValues,
@@ -86,6 +90,11 @@ export function LoginAuthForm() {
 
     if (loginResult.success) {
       dispatch(setAuthState(loginResult.data))
+      posthog?.identify(loginResult.data.user.id, {
+        email: loginResult.data.user.email,
+      })
+      posthog?.group("role", loginResult.data.user.role)
+      posthog?.capture("user_log_in")
       // await 2 seconds to allow the auth state to be set
       await new Promise((resolve) => setTimeout(resolve, 2000))
       router.push("/")

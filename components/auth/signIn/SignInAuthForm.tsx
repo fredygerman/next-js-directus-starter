@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { register } from "@/actions/authForms"
 import { setAuthState } from "@/store/slices/auth"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { usePostHog } from "posthog-js/react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
@@ -56,6 +57,7 @@ export function SignInAuthForm() {
     resolver: zodResolver(accountFormSchema),
     defaultValues,
   })
+  const posthog = usePostHog()
 
   const onSubmit = async (data: AccountFormValues) => {
     const { email, password, first_name, last_name } = data
@@ -79,6 +81,11 @@ export function SignInAuthForm() {
 
     if (registerResult.success) {
       dispatch(setAuthState(registerResult.data))
+      posthog?.identify(registerResult.data.user.id, {
+        email: registerResult.data.user.email,
+      })
+      posthog?.group("role", registerResult.data.user.role)
+      posthog?.capture("user_sign_in")
       // wait for 2 seconds
       await new Promise((resolve) => setTimeout(resolve, 2000))
       router.push("/")
