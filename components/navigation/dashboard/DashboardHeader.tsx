@@ -24,10 +24,7 @@ export function DashboardHeader() {
           </div>
 
           <div className="flex items-center space-x-2">
-            <MainNav
-              items={siteConfig.mainNav}
-              suppressHydrationWarning={true}
-            />
+            <MainNav items={siteConfig.mainNav} />
           </div>
 
           <div className="flex items-center space-x-2">
@@ -76,10 +73,7 @@ export function DashboardHeader() {
 
         <div className="flex w-full items-center justify-between px-4 md:hidden">
           <div className="flex items-center space-x-2">
-            <MainNav
-              items={siteConfig.mainNav}
-              suppressHydrationWarning={true}
-            />
+            <MainNav items={siteConfig.mainNav} />
           </div>
 
           <div className="flex items-center space-x-2">
