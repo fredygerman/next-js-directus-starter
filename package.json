@@ -35,6 +35,7 @@
     "next-themes": "^0.2.1",
     "nextjs-progressbar": "^0.0.16",
     "nprogress": "^0.2.0",
+    "posthog-js": "^1.81.3",
     "react": "^18.2.0",
     "react-directus": "^0.0.2",
     "react-dom": "^18.2.0",

@@ -21,6 +21,8 @@ export const env = createEnv({
   },
   client: {
     NEXT_PUBLIC_APP_URL: z.string(),
+    REACT_APP_PUBLIC_POSTHOG_KEY: z.string().optional(),
+    REACT_APP_PUBLIC_POSTHOG_HOST: z.string().optional(),
   },
   runtimeEnv: {
     DIRECTUS_URL: process.env.DIRECTUS_URL,
@@ -29,6 +31,8 @@ export const env = createEnv({
     DIRECTUS_DEFAULT_ROLE_ID: process.env.DIRECTUS_DEFAULT_ROLE_ID,
     DIRECTUS_USER_CREATOR_TOKEN: process.env.DIRECTUS_USER_CREATOR_TOKEN,
     DIRECTUS_PROJECT_NAME: process.env.DIRECTUS_PROJECT_NAME,
+    REACT_APP_PUBLIC_POSTHOG_KEY: process.env.REACT_APP_PUBLIC_POSTHOG_KEY,
+    REACT_APP_PUBLIC_POSTHOG_HOST: process.env.REACT_APP_PUBLIC_POSTHOG_HOST,
     GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
     GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
     GITHUB_ACCESS_TOKEN: process.env.GITHUB_ACCESS_TOKEN,
