@@ -11,6 +11,8 @@ export function AdvancedLink({
   onClick, // Extract onClick directly
   analyticsValue, // Extract analyticsValue directly
   analyticsProperties, // Extract analyticsProperties directly
+  // any other props that come through
+  ...props
 }: {
   children: ReactNode
   href: string
@@ -18,6 +20,7 @@ export function AdvancedLink({
   onClick?: () => void
   analyticsValue?: string
   analyticsProperties?: object | null
+  [key: string]: any
 }) {
   const captureEvent = () => {
     // Add Posthog tracking when the component is clicked.
@@ -36,6 +39,7 @@ export function AdvancedLink({
         captureEvent()
         onClick && onClick()
       }}
+      {...props}
     >
       {children}
     </Link>
