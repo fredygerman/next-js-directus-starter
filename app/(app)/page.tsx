@@ -1,9 +1,10 @@
-import Link from "next/link"
+import posthog from "posthog-js"
 
 import { env } from "@/env.mjs"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
+import { AdvancedLink } from "@/components/advanced/advanced-link"
 
 async function getGitHubStars(): Promise<string | null> {
   try {
@@ -39,16 +40,18 @@ export default async function IndexPage() {
     <>
       <section className="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
         <div className="container flex max-w-[64rem] flex-col items-center gap-4 text-center">
-          <Link
+          <AdvancedLink
             href={
               siteConfig.socials.find((social) => social.name === "Twitter")
                 ?.url ?? "#"
             }
             className="rounded-2xl bg-muted px-4 py-1.5 text-sm font-medium"
             target="_blank"
+            analyticsValue="clicked_follow_on_twitter"
+            analyticsProperties={{ source: "home_page" }}
           >
             Follow along on Twitter
-          </Link>
+          </AdvancedLink>
           <h1 className="font-heading text-3xl font-extrabold leading-tight tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl">
             Next.js 13 & Directus CMS Starter 🚀
           </h1>
@@ -60,15 +63,23 @@ export default async function IndexPage() {
             updates.
           </p>
           <div className="space-x-4">
-            <Link href="/login" className={cn(buttonVariants({ size: "lg" }))}>
+            <AdvancedLink
+              href="/login"
+              className={cn(buttonVariants({ size: "lg" }))}
+              analyticsValue="clicked_get_started"
+              analyticsProperties={{ source: "home_page" }}
+            >
               Get Started
-            </Link>
-            <Link
+            </AdvancedLink>
+
+            <AdvancedLink
               href="#features"
               className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
+              analyticsValue="clicked_features"
+              analyticsProperties={{ source: "home_page" }}
             >
               Features
-            </Link>
+            </AdvancedLink>
           </div>
         </div>
       </section>
@@ -195,7 +206,7 @@ export default async function IndexPage() {
           <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
             The main objective is to help developers who use Directus and Next
             Js to build their apps faster.
-            <Link
+            <AdvancedLink
               href={
                 siteConfig.socials.find((social) => social.name === "Github")
                   ?.url ?? "#"
@@ -203,17 +214,21 @@ export default async function IndexPage() {
               target="_blank"
               rel="noreferrer"
               className="underline underline-offset-4"
+              analyticsValue="github"
+              analyticsProperties={{ source: "home_page" }}
             >
               GitHub
-            </Link>
+            </AdvancedLink>
             .{" "}
           </p>
           {stars && (
-            <Link
+            <AdvancedLink
               href={`https:/github.com/${siteConfig.gitHubApiRepoName}` ?? "#"}
               target="_blank"
               rel="noreferrer"
               className="flex"
+              analyticsValue="github"
+              analyticsProperties={{ source: "home_page" }}
             >
               <div className="flex h-10 w-10 items-center justify-center space-x-2 rounded-md border border-muted bg-muted">
                 <svg
@@ -231,7 +246,7 @@ export default async function IndexPage() {
                   {stars} stars on GitHub
                 </div>
               </div>
-            </Link>
+            </AdvancedLink>
           )}
         </div>
       </section>

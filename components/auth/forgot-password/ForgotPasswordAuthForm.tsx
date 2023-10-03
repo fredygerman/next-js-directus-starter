@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation"
 import { forgotPassword } from "@/actions/authForms"
 import { zodResolver } from "@hookform/resolvers/zod"
+import posthog from "posthog-js"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
@@ -36,6 +37,7 @@ export function ForgotPasswordAuthForm() {
 
   const onSubmit = async (data: AccountFormValues) => {
     const { email } = data
+    posthog?.capture("user_forgot_password")
     const result = await forgotPassword(email)
     console.log(result)
     toast({

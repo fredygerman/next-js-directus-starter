@@ -54,11 +54,12 @@ pnpm run dev
 - Tailwind CSS class sorting, merging and linting.
 - Next js Server Side Components (SSC) & Client Side Components (CSC)
 - Next js Form Actions
+- Analytics with Posthog
 
 ## Roadmap
 
 - [✅] Add Login and Register
-- [ ] Add Analytics
+- [✅] Add Analytics
 - [ ] Add Installation Instructions Documentation
 - [ ] Add Dashboard Page
 - [ ] Add Simple Blog
