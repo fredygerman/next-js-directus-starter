@@ -25,7 +25,10 @@ export function AppHeader() {
           </div>
 
           <div className="flex items-center space-x-2">
-            <MainNav items={siteConfig.mainNav} />
+            <MainNav
+              items={siteConfig.mainNav}
+              suppressHydrationWarning={true}
+            />
           </div>
 
           <div className="flex items-center space-x-2">
@@ -74,7 +77,10 @@ export function AppHeader() {
 
         <div className="flex w-full items-center justify-between px-4 md:hidden">
           <div className="flex items-center space-x-2">
-            <MainNav items={siteConfig.mainNav} />
+            <MainNav
+              items={siteConfig.mainNav}
+              suppressHydrationWarning={true}
+            />
           </div>
 
           <div className="flex items-center space-x-2">
