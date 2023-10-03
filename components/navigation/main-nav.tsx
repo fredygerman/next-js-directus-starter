@@ -23,7 +23,7 @@ export function MainNav({ items }: MainNavProps) {
   return (
     <>
       {/* Desktop navbar */}
-      <nav className="hidden px-1 md:flex md:items-center md:justify-between md:gap-6">
+      <nav className="hidden px-1 md:flex md:items-center md:justify-between md:gap-6" suppressHydrationWarning={true}>
         {items?.length ? (
           <div className="flex gap-6">
             {items?.map(
@@ -53,7 +53,7 @@ export function MainNav({ items }: MainNavProps) {
 
       {/* Mobile navbar */}
 
-      <nav className="flex items-center justify-between px-1 md:hidden">
+      <nav className="flex items-center justify-between px-1 md:hidden" suppressHydrationWarning={true}>
         <Link
           href="/"
           className="flex items-start space-x-2"
