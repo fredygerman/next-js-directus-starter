@@ -4,7 +4,7 @@ import { ReactNode, useEffect } from "react"
 import Link from "next/link"
 import posthog from "posthog-js"
 
-export function BetterLink({
+export function AdvancedLink({
   children,
   href, // Extract href directly
   className, // Extract className directly
