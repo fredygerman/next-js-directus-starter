@@ -5,6 +5,7 @@ import { RootLayoutProps } from "@/types/general"
 import { siteConfig } from "@/config/site"
 import { fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
+import { CustomPostHogProvider } from "@/components/misc/posthog-provider"
 import { ProgressBar } from "@/components/misc/progress"
 import CustomProvider from "@/components/misc/state-provider"
 // import Seo from "@/components/misc/seo"
@@ -76,11 +77,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
         >
           {/* <Seo> */}
           <ProgressBar />
-          <CustomProvider>
-            <div className="relative flex min-h-screen flex-col">
-              {children}
-            </div>
-          </CustomProvider>
+          <CustomPostHogProvider>
+            <CustomProvider>
+              <div className="relative flex min-h-screen flex-col">
+                {children}
+              </div>
+            </CustomProvider>
+          </CustomPostHogProvider>
           <ToasterWrapper />
           <TailwindIndicator />
           {/* </Seo> */}

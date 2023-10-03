@@ -10,7 +10,6 @@ const reducers = combineReducers({
 const rootReducer: Reducer = (state: RootState, action: AnyAction) => {
   if (action.type === "auth/logoutUser" || action.type === "admin/logout") {
     // check for action types
-    console.log("reducer reset")
     state = {} as RootState
   }
   return reducers(state, action)
