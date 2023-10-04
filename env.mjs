@@ -19,8 +19,8 @@ export const env = createEnv({
     NODE_ENV: z.string().optional(),
 
     // Posthog
-    POSTHOG_KEY: z.string().optional(),
-    POSTHOG_HOST_URL: z.string().optional(),
+    NEXT_PUBLIC_POSTHOG_KEY: z.string().optional(),
+    NEXT_PUBLIC_HOST_URL: z.string().optional(),
   },
   runtimeEnv: {
     // App
@@ -35,8 +35,8 @@ export const env = createEnv({
     DIRECTUS_PROJECT_NAME: process.env.DIRECTUS_PROJECT_NAME,
 
     // Posthog
-    POSTHOG_KEY: process.env.POSTHOG_KEY,
-    POSTHOG_HOST_URL: process.env.POSTHOG_HOST_URL,
+    NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
+    NEXT_PUBLIC_HOST_URL: process.env.NEXT_PUBLIC_HOST_URL,
 
     // Github
     GITHUB_ACCESS_TOKEN: process.env.GITHUB_ACCESS_TOKEN,
