@@ -11,7 +11,7 @@ export function CustomPostHogProvider({ children }: any) {
       // Enable debug mode in development
       loaded: (posthog) => {
         if (process.env.NODE_ENV === "development") posthog.debug()
-        console.log("PostHog debug enabled")
+        // console.log("PostHog debug enabled")
       },
       capture_pageview: true,
     })

@@ -67,7 +67,7 @@ export function SignInAuthForm() {
       first_name,
       last_name
     )
-    console.log("Login Result : ", registerResult)
+    // console.log("Login Result : ", registerResult)
 
     toast({
       title: registerResult.success ? "Success 🥳 " : "Error 🫤",

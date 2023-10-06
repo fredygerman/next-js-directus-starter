@@ -39,7 +39,7 @@ export function ForgotPasswordAuthForm() {
     const { email } = data
     posthog?.capture("user_forgot_password")
     const result = await forgotPassword(email)
-    console.log(result)
+    // console.log(result)
     toast({
       title: "You submitted the following values:",
       description: (
