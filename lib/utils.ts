@@ -27,13 +27,13 @@ export async function getResponseMessage(data: any) {
     data.errors &&
     data.errors[0].extensions.code
   ) {
-    console.log(
-      "data.errors[0].extensions.code is : ",
-      data.errors[0].extensions.code
-    )
+    // console.log(
+    //   "data.errors[0].extensions.code is : ",
+    //   data.errors[0].extensions.code
+    // )
 
     if (data.errors[0].extensions.code === "TOKEN_EXPIRED") {
-      console.log("token expired")
+      // console.log("token expired")
       localStorage.removeItem("persist:root")
       localStorage.clear()
       localStorage.setItem("logged-out", "true")
@@ -44,13 +44,13 @@ export async function getResponseMessage(data: any) {
       responseMessages[
         data.errors[0].extensions.code as keyof typeof responseMessages
       ] || responseMessages.UNKNOWN_ERROR
-    console.log("errorMessage is : ", errorMessage)
+    // console.log("errorMessage is : ", errorMessage)
     return errorMessage
   }
 
   // check if data. message exists in data object, if it does return it otherwise return the default message
   if (data.message) {
-    console.log("data.message is : ", data.message)
+    // console.log("data.message is : ", data.message)
     return data.message
   }
 
