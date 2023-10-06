@@ -5,7 +5,7 @@ import { getResponseMessage } from "./utils"
 const handleApiResponse = async (response: Response) => {
   try {
     const data = await response.json()
-    console.log(data)
+    // console.log(data)
 
     if (!data.errors) {
       return {
@@ -16,13 +16,13 @@ const handleApiResponse = async (response: Response) => {
     }
 
     const errorMessage = await getResponseMessage(data)
-    console.log(errorMessage)
+    // console.log(errorMessage)
     return {
       message: errorMessage,
       success: false,
     }
   } catch (err) {
-    console.error(err)
+    // console.error(err)
     return {
       message: "Something went wrong",
       success: false,
@@ -49,7 +49,7 @@ export const sendDirectusApiRequest = async (
         ? env.DIRECTUS_USER_CREATOR_TOKEN
         : bodyData?.access_token // maybe we should just always keep the token in the local storage and use it from there
 
-      console.log("token used is : ", token)
+      // console.log("token used is : ", token)
 
       headers["Authorization"] = `Bearer ${token}`
     }
@@ -61,7 +61,7 @@ export const sendDirectusApiRequest = async (
         body: method === "GET" ? undefined : JSON.stringify(bodyData),
         cache: "no-store",
       })
-      console.log("response from", endpoint, "is : ", JSON.stringify(response))
+      // console.log("response from", endpoint, "is : ", JSON.stringify(response))
 
       return handleApiResponse(response)
     }
@@ -71,11 +71,11 @@ export const sendDirectusApiRequest = async (
       headers: headers,
       body: method === "GET" ? undefined : JSON.stringify(bodyData),
     })
-    console.log("response from", endpoint, "is : ", JSON.stringify(response))
+    // console.log("response from", endpoint, "is : ", JSON.stringify(response))
 
     return handleApiResponse(response)
   } catch (err) {
-    console.error(err)
+    // console.error(err)
     return {
       message: "Something went wrong",
       success: false,
